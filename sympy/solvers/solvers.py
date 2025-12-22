@@ -1176,7 +1176,7 @@ def solve(f, *symbols, **flags):
             # Strategy: Convert sin/cos to complex exponentials
             # This turns the system into a polynomial system of exponentials.
             # We use .cancel() to clear denominators (negative exponents) safely.
-                f_exp = [fi.rewrite(exp).cancel().as_numer_denom()[0] for fi in f]
+                f_exp = [fi.expand(trig=True).rewrite(exp).cancel().as_numer_denom()[0] for fi in f]
                 flags['check'] = False
                 flags['simplify'] = False
                 linear, solution = _solve_system(f_exp, symbols, **flags)
